@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1.0"
+    />
+    <title>Forest Fire Prediction</title>
+
+    <!-- CSS  -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+
+  <body>
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <br /><br />
+        <h1 class="header center Red">Forest Fire Prediction</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">
+            Predict the probability of Forest-Fire Occurence
+            <br />
+          </h5>
+        </div>
+
+        <div class="row">
+          <form action="/predict" method="post" name="RegForm" class="col s12">
+            <div class="row">
+              <div class="input-field col s4">
+                <label for="first_name"><b>FFMC</b></label>
+                <input
+                  placeholder="FFMC Index 18.7-96.20 in FWI system"
+                  name="FFMC"
+                  id="last_name"
+                  type="text"
+                  class="validate"
+                  required
+                />
+              </div>
+              <div class="input-field col s4">
+                <label for="last_name"><b>DMC</b></label>
+                <input
+                  id="last_name"
+                  name="DMC"
+                  placeholder="DMC Index 1.1-291.3 in FWI system"
+                  type="text"
+                  class="validate"
+                  required
+                />
+              </div>
+              <div class="input-field col s4">
+                <label for="last_name"><b>DC</b></label>
+                <input
+                  id="last_name"
+                  name="DC"
+                  placeholder="DC Index 7.9-860.6 in FWI system"
+                  type="text"
+                  class="validate"
+                  required
+                />
+              </div>
+              <div class="input-field col s4">
+                <label for="last_name"><b>ISI</b></label>
+                <input
+                  id="last_name"
+                  name="ISI"
+                  placeholder="ISI Index 0.0-56.10 in FWI system"
+                  type="text"
+                  class="validate"
+                  required
+                />
+              </div>
+              <div class="input-field col s4">
+                <label for="last_name"><b>Temperature</b></label>
+                <input
+                  id="last_name"
+                  name="Temperature"
+                  placeholder="2.2-33.30 degrees Celcius"
+                  type="text"
+                  class="validate"
+                  required
+                />
+              </div>
+              <div class="input-field col s4">
+                <label for="_name"><b>RH</b></label>
+                <input
+                  id="_name"
+                  name="RH%"
+                  placeholder="RH% 15.0-100.0"
+                  type="text"
+                  class="validate"
+                  required
+                />
+              </div>
+              <div class="input-field col s4">
+                <label for="_name"><b>Wind</b></label>
+                <input
+                  id="_name"
+                  name="Wind km/hr"
+                  placeholder="Wind km/hr 0.49-9.40"
+                  type="text"
+                  class="validate"
+                  required
+                />
+              </div>
+              <div class="input-field col s4">
+                <label for="_name"><b>Rain</b></label>
+                <input
+                  id="_name"
+                  name="Rain"
+                  placeholder="Rain mm/m2 0.0-6.4"
+                  type="text"
+                  class="validate"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row center">
+              <button
+                type="submit"
+                class="btn-large waves-effect waves-light indigo"
+              >
+                Predict Probability
+              </button>
+            </div>
+          </form>
+        </div>
+        {% if pred == True %}
+        <script>
+          if({{ probability }} > 0.65) {
+            M.toast({
+              html: "The forest is more susceptible to forest fire! (" + '{{ probability }}' + ")",
+              classes: "red",
+              displayLength: 10000,
+            });
+          } else {
+            M.toast({
+              html: "The forest is less susceptible to forest fire! (" + '{{ probability }}' + ")",
+              classes: "green",
+              displayLength: 10000,
+            });
+          }
+        </script>
+        {% endif %}
+      </div>
+    </div>
+
+    <script>
+      function GEEKFORGEEKS() {
+        var name = document.forms["RegForm"]["FFMC"];
+        var email = document.forms["RegForm"]["DMC"];
+        var phone = document.forms["RegForm"]["DC"];
+        var what = document.forms["RegForm"]["ISI"];
+        var password = document.forms["RegForm"]["Temperature"];
+        var address = document.forms["RegForm"]["RH%"];
+        var address2 = document.forms["RegForm"]["Wind km/hr"];
+        var address3 = document.forms["RegForm"]["Rain"];
+
+        if (name.value == "") {
+          window.alert("Please enter the FFMC.");
+          name.focus();
+          return false;
+        }
+
+        if (address.value == "") {
+          window.alert("Please enter the DMC.");
+          address.focus();
+          return false;
+        }
+
+        if (email.value == "") {
+          window.alert("Please enter the DC.");
+          email.focus();
+          return false;
+        }
+
+        if (phone.value == "") {
+          window.alert("Please enter the ISI.");
+          phone.focus();
+          return false;
+        }
+
+        if (password.value == "") {
+          window.alert("Please enter the Temperature");
+          password.focus();
+          return false;
+        }
+
+        if (what.value == "") {
+          alert("Please enter the RH%.");
+          what.focus();
+          return false;
+        }
+
+        if (address2.value == "") {
+          window.alert("Please enter the Wind km/hr .");
+          address.focus();
+          return false;
+        }
+
+        if (address3.value == "") {
+          window.alert("Please enter the Rain.");
+          address.focus();
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>
